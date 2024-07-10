@@ -20,8 +20,11 @@ const config = {
     extend: {
       colors: {
         dark:{
-          1: '#1C1F2E',
-          2: '#161925',
+          1: '#240046',
+          2: '#10002b',
+        },
+        purple:{
+          1:'#9d4edd'
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
