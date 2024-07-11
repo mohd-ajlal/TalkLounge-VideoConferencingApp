@@ -1,17 +1,21 @@
 'use client'
 
 import React, { useState } from 'react'
-import { WobbleCard } from "@/components/ui/wobble-card";
 import Image from 'next/image';
 import HomeCard from './HomeCard';
 import { useRouter } from 'next/navigation';
+import MeetingModal from './MeetingModal';
 const MeetingTypeList = () => {
 
 
     const router = useRouter();
-  const [meetingState, setMeetingState] = useState<
-    'isScheduleMeeting' | 'isJoiningMeeting' | 'isInstantMeeting' | undefined
-  >(undefined);
+  const [meetingState, setMeetingState] = 
+  useState<
+    'isScheduleMeeting' | 'isJoiningMeeting' | 'isInstantMeeting' | undefined>();
+
+  const createMeeting = () =>{
+    
+  }
   
   
     return (
@@ -23,35 +27,44 @@ const MeetingTypeList = () => {
             Box 1
         </div> */}
 
-<HomeCard
+      <HomeCard
         img="/icons/add-meeting.svg"
-        className="bg-orange-1"
         title="New Meeting"
         description="Start an instant meeting"
+        containerClassName="bg-orange-1"
         handleClick={() => setMeetingState('isInstantMeeting')}
       />
       <HomeCard
         img="/icons/join-meeting.svg"
         title="Join Meeting"
         description="via invitation link"
-        className="bg-blue-600"
+        containerClassName="bg-blue-600"
         handleClick={() => setMeetingState('isJoiningMeeting')}
       />
       <HomeCard
         img="/icons/schedule.svg"
         title="Schedule Meeting"
         description="Plan your meeting"
-        className="bg-pink-1"
+        containerClassName="bg-pink-1"
         handleClick={() => setMeetingState('isScheduleMeeting')}
       />
       <HomeCard
         img="/icons/recordings.svg"
         title="View Recordings"
         description="Meeting Recordings"
-        className="bg-yellow-1"
-        handleClick={() => router.push('/recordings')}
+        containerClassName="bg-yellow-1"
+        handleClick={() => setMeetingState('isJoiningMeeting')}
       />
       
+      <MeetingModal
+        isOpen={meetingState === 'isInstantMeeting'}
+        onClose={() => setMeetingState(undefined)}
+        title="Start an Instant Meeting"
+        className="text-center"
+        buttonText="Start Meeting"
+        handleClick={createMeeting}
+      />
+
     </section>
   )
 }

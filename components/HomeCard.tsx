@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 interface HomeCardProps {
-    className?: string;
+  containerClassName?: string;
     img: string;
     title: string;
     description: string;
@@ -12,16 +12,14 @@ interface HomeCardProps {
   }
 
 
-const HomeCard = ({className, img, title, description, handleClick}:HomeCardProps) => {
+const HomeCard = ({containerClassName, img, title, description, handleClick}:HomeCardProps) => {
   return (
-
+<div onClick={handleClick}>
     <WobbleCard
-        containerClassName={cn('min-h-[500px] lg:min-h-[300px] flex flex-col justify-between w-full xl:max-w-[270px] min-h-[260px] cursor-pointer', className)}
-        className=""
+        containerClassName={cn('min-h-[500px] lg:min-h-[300px] flex flex-col justify-between w-full xl:max-w-[270px] min-h-[260px] cursor-pointer', containerClassName)}
       >
 {/* <div className='flex-center glassmorphirm size-12 rounded-[10px]'> */}
 <div className="max-w-xs"
-    onClick={handleClick}
     >
         <Image
           src={img} 
@@ -39,6 +37,7 @@ const HomeCard = ({className, img, title, description, handleClick}:HomeCardProp
           </p>
           </div>
       </WobbleCard>
+      </div>
   )
 }
 
