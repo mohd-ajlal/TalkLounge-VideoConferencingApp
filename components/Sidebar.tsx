@@ -23,7 +23,7 @@ const Sidebar = () => {
                 'flex gap-4 itemss-center p-4 rounded-lg justify-start',
                 {
                   'bg-purple-1': isActive,
-                  'hover:bg-purple-1': !isActive,
+                  'hover:bg-purple-2': !isActive,
                   'text-black': isActive,
                   'hover:text-black': !isActive,
                 }
