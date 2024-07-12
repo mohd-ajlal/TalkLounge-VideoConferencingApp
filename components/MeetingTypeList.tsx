@@ -5,16 +5,78 @@ import Image from 'next/image';
 import HomeCard from './HomeCard';
 import { useRouter } from 'next/navigation';
 import MeetingModal from './MeetingModal';
+import { useUser } from '@clerk/nextjs';
+import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
+import { useToast } from "@/components/ui/use-toast"
+
+
+
+const initialValues = {
+  dateTime: new Date(),
+  description: '',
+  link: '',
+};
+
+
 const MeetingTypeList = () => {
 
+  const { toast } = useToast()
 
-    const router = useRouter();
+
+  const router = useRouter();
   const [meetingState, setMeetingState] = 
   useState<
     'isScheduleMeeting' | 'isJoiningMeeting' | 'isInstantMeeting' | undefined>();
 
-  const createMeeting = () =>{
-    
+    const { user } = useUser();
+    const client = useStreamVideoClient();
+
+    const [values, setValues] = useState(initialValues);
+
+    const [callDetail, setCallDetail] = useState<Call>();
+ 
+  const createMeeting = async () =>{
+      if(!client || !user) return;
+
+
+      try {
+
+        if(!values.dateTime){
+          toast({
+            title: "Please select a date and time for the meeting", 
+          })
+
+          return;
+        }
+        const id = crypto.randomUUID();
+        const call = client.call('default', id);
+
+        if (!call) throw new Error('Failed to create meeting');
+      const startsAt =
+        values.dateTime.toISOString() || new Date(Date.now()).toISOString();
+      const description = values.description || 'Instant Meeting';
+      await call.getOrCreate({
+        data: {
+          starts_at: startsAt,
+          custom: {
+            description,
+          },
+        },
+      });
+      setCallDetail(call);
+      if (!values.description) {
+        router.push(`/meeting/${call.id}`);
+      }
+      toast({
+        title: 'Meeting Created',
+      });
+
+      } catch (error) {
+        console.log(error);
+        toast({
+          title: "Failed to create meeting please try again", 
+        })
+      }
   }
   
   

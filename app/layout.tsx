@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { BackgroundBeams } from "../components/ui/background-beams";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "@/components/ui/toaster"
 // import { SWRConfig } from 'swr';
 
 
@@ -22,6 +23,7 @@ export default function RootLayout({
     <html lang="en">
 <ClerkProvider>
       <body className={`${inter.className} bg-dark-2`}>{children}
+        <Toaster/>
       </body>
       </ClerkProvider>
     </html>
