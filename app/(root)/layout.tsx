@@ -6,11 +6,11 @@ const RootLayout  = ({children}:{children:ReactNode}) => {
   return (
     <main>
       <StreamVideoProvider>
-          <BackgroundBeams
-      className='fixed top-0 left-64 w-full h-full z-0'
-      />
         {children}
       </StreamVideoProvider>
+                {/* <BackgroundBeams
+      className='fixed top-0 left-64 w-full h-full z-0'
+      /> */}
     </main>
   )
 }
