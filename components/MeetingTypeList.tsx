@@ -82,7 +82,7 @@ const MeetingTypeList = () => {
   }
 
 
-  // const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetail?.id}`;
+  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetail?.id}`;
   
   
     return (
@@ -167,8 +167,8 @@ const MeetingTypeList = () => {
           onClose={() => setMeetingState(undefined)}
           title="Meeting Created"
           handleClick={() => {
-            // navigator.clipboard.writeText(meetingLink);
-            // toast({ title: 'Link Copied' });
+            navigator.clipboard.writeText(meetingLink);
+            toast({ title: 'Link Copied' });
           }}
           image={'/icons/checked.svg'}
           buttonIcon="/icons/copy.svg"
