@@ -55,7 +55,7 @@ const MeetingModel = ({isOpen, onClose, title, className, children, handleClick,
       {children}
       <Button
       className={
-        "bg-purple-1 focus-visible:ring-0 focus-visible:ring-offset-0"
+        "bg-purple-1 focus-visible:ring-0 focus-visible:ring-offset-0 hover:bg-dark-3"
       }
       onClick={handleClick}>
         {buttonIcon && (
